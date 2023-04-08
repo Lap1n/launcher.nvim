@@ -22,7 +22,7 @@ jobs:
       #   if: ${{matrix.build.os}} == 'ubuntu-latest'
       #   run: sudo apt-get install -y libluajit-5.1-dev 
       - name: install luajit macos
-        # if: ${{matrix.build.os}} == 'macos'
+        if: ${{matrix.build.os}} == 'macos'
         run: brew install luajit
       # - name: install luajit window
       #   if: ${{matrix.build.os}} == 'release_windows'
