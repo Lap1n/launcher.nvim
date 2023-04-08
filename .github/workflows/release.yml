@@ -19,7 +19,6 @@ jobs:
           ref: main
       - name: set up rust
         uses: actions-rs/toolchain@v1
-
         with:
           toolchain: stable
       - name: install luajit
