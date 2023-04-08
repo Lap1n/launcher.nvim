@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix:
         build: [{os: ubuntu-latest,make_target: release_linux},{os: macos-latest,make_target: release_ios},{os: windows-latest, make_target: release_windows}]
+        build: [{os: ubuntu-latest,make_target: release_linux},{os: macos-latest,make_target: release_ios},{os: windows-latest, make_target: release_windows}]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -18,7 +19,14 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - name: install luajit
+      - name: install luajit linux
+        if: ${{matrix.build.os}} == 'ubuntu-latest'
+        run: sudo apt-get install -y libluajit-5.1-dev 
+      - name: install luajit macos
+        if: ${{matrix.build.os}} == 'macos'
+        run: brew install luajit
+      - name: install luajit window
+        if: ${{matrix.build.os}} == 'release_windows'
         run: sudo apt-get install -y libluajit-5.1-dev 
       - name: build binary
         run: make ${{ matrix.build.make_target }}
