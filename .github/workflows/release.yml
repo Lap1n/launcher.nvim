@@ -10,7 +10,6 @@ jobs:
     strategy:
       matrix:
         build: [{os: ubuntu-latest,make_target: release_linux},{os: macos-latest,make_target: release_ios},{os: windows-latest, make_target: release_windows}]
-        build: [{os: ubuntu-latest,make_target: release_linux},{os: macos-latest,make_target: release_ios},{os: windows-latest, make_target: release_windows}]
     steps:
       - uses: actions/checkout@v2
         with:
