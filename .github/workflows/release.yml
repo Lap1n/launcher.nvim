@@ -18,15 +18,10 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      # - name: install luajit linux
-      #   if: ${{matrix.build.os}} == 'ubuntu-latest'
-      #   run: sudo apt-get install -y libluajit-5.1-dev 
-      - name: install luajit macos
-        if: ${{matrix.build.os}} == 'macos'
-        run: brew install luajit
-      # - name: install luajit window
-      #   if: ${{matrix.build.os}} == 'release_windows'
-      #   run: sudo apt-get install -y libluajit-5.1-dev 
+      - name: install luajit
+        run: |
+          [[ "${{ matrix.build.os }}" = "ubuntu-latest" ]] && sudo apt-get install -y libluajit-5.1-dev  || true
+          [[ "${{ matrix.build.os }}" = "macos-latest" ]] && brew install luajit || true
       - name: build binary
         run: make ${{ matrix.build.make_target }}
       - uses: endbug/add-and-commit@v9
